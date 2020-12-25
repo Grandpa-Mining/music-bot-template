@@ -50,7 +50,7 @@ function updateTimestamp() {
   firebase.database().ref(`/otherbotStatus/${FIREBASEID}/timestamp`).set(Date.now());
 }
 
-setTimeout(() => {
+setInterval(() => {
   updateTimestamp()
 }, 60000);
 
