@@ -15,12 +15,52 @@ client.queue = new Map();
 const cooldowns = new Collection();
 const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
+// Firebase App (the core Firebase SDK) is always required and
+// must be listed before other Firebase SDKs
+const firebase = require("firebase/app");
+
+// Add the Firebase products that you want to use
+require("firebase/auth");
+require("firebase/database");
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAhPz-IG85lj7AIPvrPvxV0-RnLNaU888A",
+  authDomain: "grandpa-mining-website.firebaseapp.com",
+  databaseURL: "https://grandpa-mining-website.firebaseio.com",
+  projectId: "grandpa-mining-website",
+  storageBucket: "grandpa-mining-website.appspot.com",
+  messagingSenderId: "201425292407",
+  appId: "1:201425292407:web:54a6b7d8a8f3d777e04a72",
+};
+firebase.initializeApp(firebaseConfig);
+
+// Log in in order to write to the database
+firebase.auth().signInWithEmailAndPassword('grandpamining@gmail.com', 'COFT.ket4couh3twiy')
+  .then((user) => {
+    // Signed in 
+    // ...
+  })
+  .catch((error) => {
+    var errorCode = error.code;
+    var errorMessage = error.message;
+  });
+
+function updateTimestamp() {
+  firebase.database().ref(`/otherbotStatus/${FIREBASEID}/welcome_timestamp`).set(Date.now());
+}
+
+setTimeout(() => {
+  updateTimestamp()
+}, 60000);
+
 /**
  * Client Events
  */
 client.on("ready", () => {
   console.log(`${client.user.username} ready!`);
   client.user.setActivity(`KKQQ`, { type: "LISTENING" });
+  updateTimestamp()
 });
 client.on("warn", (info) => console.log(info));
 client.on("error", console.error);
