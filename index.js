@@ -47,7 +47,7 @@ firebase.auth().signInWithEmailAndPassword('grandpamining@gmail.com', 'COFT.ket4
   });
 
 function updateTimestamp() {
-  firebase.database().ref(`/otherbotStatus/${FIREBASEID}/welcome_timestamp`).set(Date.now());
+  firebase.database().ref(`/otherbotStatus/${FIREBASEID}/timestamp`).set(Date.now());
 }
 
 setTimeout(() => {
